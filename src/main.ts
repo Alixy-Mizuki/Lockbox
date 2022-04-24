@@ -67,7 +67,7 @@ export default class Lockbox extends Eris.Client {
 	there we can see 3 elements
 	applicationID = we can get this on discord developer portal from a the application we made
 	token = this is the application TOKEN or a login Key for interacting with Discord API, this string also super super dangerous to be hardcoded to the code, 
-					thats why we use ENVIRONMENT VARIABLES, so that way its safe from internet or people that wanted to use it for malicious purpose
+		thats why we use ENVIRONMENT VARIABLES, so that way its safe from internet or people that wanted to use it for malicious purpose
 	publicKey = we can get this on discord developer portal from a the application we made
 	*/
         const creator = new SlashCreator({
