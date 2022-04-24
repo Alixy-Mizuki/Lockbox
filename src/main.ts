@@ -39,37 +39,37 @@ export default class Lockbox extends Eris.Client {
     
 // 	on this for Of loop, we will looping the every single path we got before hand
         for (const loc of list) {
-					
-					const start = performance.now();
-					// we import the file as Event
-					let event = await import(loc) as Event | { default: Event; };
-					
-					// if theres a "default" inside the file we will make the event as defaulted event
-					if ("default" in event) event = event.default;
-/*
-this = reference to the client we extend
-now we use on method to listen the events, it has 2 arguments which the first is the Event name and the second is the listener
-for example 'MessageCreate' as event name and (message) as the listener
-*/
-					this.on(event.name, event.listener.bind(this));
-					const end = performance.now();
-					// we log the event succesfully loaded with time load
-					Logger.debug(`Loaded Event ${event.name}, in ${(end - start).toFixed(3)}ms.`)
-				}
+
+		const start = performance.now();
+		// we import the file as Event
+		let event = await import(loc) as Event | { default: Event; };
+
+		// if theres a "default" inside the file we will make the event as defaulted event
+		if ("default" in event) event = event.default;
+		/*
+		this = reference to the client we extend
+		now we use on method to listen the events, it has 2 arguments which the first is the Event name and the second is the listener
+		for example 'MessageCreate' as event name and (message) as the listener
+		*/
+		this.on(event.name, event.listener.bind(this));
+		const end = performance.now();
+		// we log the event succesfully loaded with time load
+	Logger.debug(`Loaded Event ${event.name}, in ${(end - start).toFixed(3)}ms.`)
+	}
         const oEnd = performance.now();
 				// we log all events succesfully loads with total time loading.
         Logger.debug(`Loaded ${list.length} Event(s), in ${(oEnd - oStart).toFixed(3)}ms.`)
     }
 
     async loadCommands() {
-			/*
-			here we declare creator variable consist of a class called SlashCreator with Object as arguments
-			there we can see 3 elements
-			applicationID = we can get this on discord developer portal from a the application we made
-			token = this is the application TOKEN or a login Key for interacting with Discord API, this string also super super dangerous to be hardcoded to the code, 
-							thats why we use ENVIRONMENT VARIABLES, so that way its safe from internet or people that wanted to use it for malicious purpose
-			publicKey = we can get this on discord developer portal from a the application we made
-			*/
+	/*
+	here we declare creator variable consist of a class called SlashCreator with Object as arguments
+	there we can see 3 elements
+	applicationID = we can get this on discord developer portal from a the application we made
+	token = this is the application TOKEN or a login Key for interacting with Discord API, this string also super super dangerous to be hardcoded to the code, 
+					thats why we use ENVIRONMENT VARIABLES, so that way its safe from internet or people that wanted to use it for malicious purpose
+	publicKey = we can get this on discord developer portal from a the application we made
+	*/
         const creator = new SlashCreator({
             applicationID: process.env.APPLICATION_ID!,
             token: process.env.TOKEN!,
